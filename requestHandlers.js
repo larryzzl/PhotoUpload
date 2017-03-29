@@ -3,8 +3,17 @@ var querystring = require("querystring");
 var fs = require("fs");
 var formidable = require("formidable");
 
+var log4js = require("log4js");
+log4js.configure({
+	appenders: [
+	{type: 'console'},
+	{type: 'file', filename: 'logs/main.log', category: 'main'}
+	]
+});
+var logger = log4js.getLogger('main');
+
 function start(response) {
-	console.log("Request handler 'Start' was called");
+	logger.trace("Request handler 'Start' was called");
 
 	// Display files under current folder async
 	/*
@@ -35,25 +44,24 @@ function start(response) {
 }
 
 function upload(response, request) {
-	console.log("Request handler 'Upload' was called");
+	logger.trace("Request handler 'Upload' was called");
 
 	var form = new formidable.IncomingForm();
-	console.log("about to parse");
+	logger.trace("about to parse");
 
 	form.parse(request, function (error, fields, files) {
-		console.log("parsing done");
+		logger.trace("parsing done");
 
 		if (error) {
-			console.log("Parse error: " + error);
+			logger.error("Parse error: " + error);
 		}
 
-		console.log("no error, continue");
 		fs.renameSync(files.upload.path, "/tmp/test.png", function (error) {
 			if (error) {
-				console.log("rename error: " + error);
+				logger.error("rename error: " + error);
 			}
 		});
-		console.log("rename file done");
+		logger.trace("rename file done");
 
 		response.writeHead(200, {"Content-Type": "text/html"})
 		response.write("Received Image: <br/>");
@@ -65,7 +73,7 @@ function upload(response, request) {
 }
 
 function show(response) {
-	console.log("Request handler 'show' was called.");
+	logger.trace("Request handler 'show' was called.");
 
 	fs.readFile("/tmp/test.png", "binary", function (error, file) {
 		if (error) {

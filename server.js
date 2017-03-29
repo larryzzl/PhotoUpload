@@ -3,6 +3,15 @@ var router = require("./router");
 var requestHandlers = require("./requestHandlers");
 var url = require("url");
 
+var log4js = require("log4js");
+log4js.configure({
+	appenders: [
+	{type: 'console'},
+	{type: 'file', filename: 'logs/main.log', category: 'main'}
+	]
+});
+var logger = log4js.getLogger('main');
+
 var handle = {}
 handle["/"] = requestHandlers.start;
 handle["/start"] = requestHandlers.start;
@@ -12,7 +21,7 @@ handle["/show"] = requestHandlers.show;
 http.createServer(function (request, response) {
     
 	var pathname = url.parse(request.url).pathname;
-	console.log("Request for " + pathname + " received.");
+	logger.trace("Request for " + pathname + " received.");
     router.route(handle, pathname, response, request);
     
 }).listen(process.env.PORT || 8080);

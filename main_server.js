@@ -1,6 +1,15 @@
 var http = require("http");
 var url = require("url");
 
+var log4js = require("log4js");
+log4js.configure({
+	appenders: [
+	{type: 'console'},
+	{type: 'file', filename: 'logs/main.log', category: 'main'}
+	]
+});
+var logger = log4js.getLogger('main');
+
 function start(route, handle) {
 	function onRequest(request, response) {
 
