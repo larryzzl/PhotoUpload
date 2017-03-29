@@ -3,11 +3,12 @@ var router = require("./router");
 var requestHandlers = require("./requestHandlers");
 var url = require("url");
 
+// setup Log4JS
 var log4js = require("log4js");
 log4js.configure({
 	appenders: [
 	{type: 'console'},
-	{type: 'file', filename: 'public/main.log', category: 'main'}
+	{type: 'file', filename: 'logs/main.log', category: 'main'}
 	]
 });
 var logger = log4js.getLogger('main');

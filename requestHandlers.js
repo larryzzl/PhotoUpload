@@ -1,20 +1,19 @@
-var exec = require("child_process").exec;
 var querystring = require("querystring");
 var fs = require("fs");
 var formidable = require("formidable");
 
+// setup Log4JS
+var log4js = require("log4js");
+log4js.configure({
+	appenders: [
+	{type: 'console'},
+	{type: 'file', filename: 'logs/main.log', category: 'main'}
+	]
+});
+var logger = log4js.getLogger('main');
 
 function start(response) {
-	//logger.trace("Request handler 'Start' was called");
-
-	// Display files under current folder async
-	/*
-	exec("ls -la", function (error, stdout, stderr) {
-		response.writeHead(200, {"Content-Type": "text/plain"})
-		response.write(stdout);
-		response.end();
-	});
-	*/
+	logger.trace("Request handler 'Start' was called");
 
 	 var body = '<html>'+
 			    '<head>'+
@@ -36,24 +35,24 @@ function start(response) {
 }
 
 function upload(response, request) {
-	//logger.trace("Request handler 'Upload' was called");
+	logger.trace("Request handler 'Upload' was called");
 
 	var form = new formidable.IncomingForm();
-	//logger.trace("about to parse");
+	logger.trace("about to parse");
 
 	form.parse(request, function (error, fields, files) {
-		//logger.trace("parsing done");
+	logger.trace("parsing done");
 
 		if (error) {
-			//logger.error("Parse error: " + error);
+			logger.error("Parse error: " + error);
 		}
 
 		fs.renameSync(files.upload.path, "/tmp/test.png", function (error) {
 			if (error) {
-				//logger.error("rename error: " + error);
+				logger.error("rename error: " + error);
 			}
 		});
-		//logger.trace("rename file done");
+		logger.trace("rename file done");
 
 		response.writeHead(200, {"Content-Type": "text/html"})
 		response.write("Received Image: <br/>");
@@ -65,7 +64,7 @@ function upload(response, request) {
 }
 
 function show(response) {
-	//logger.trace("Request handler 'show' was called.");
+	logger.trace("Request handler 'show' was called.");
 
 	fs.readFile("/tmp/test.png", "binary", function (error, file) {
 		if (error) {

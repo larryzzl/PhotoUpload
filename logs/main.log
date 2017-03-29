@@ -9,3 +9,15 @@
 [2017-03-29 14:15:06.378] [TRACE] main - rename file done
 [2017-03-29 14:15:06.389] [TRACE] main - Request for /show received.
 [2017-03-29 14:15:06.390] [TRACE] main - Request handler 'show' was called.
+[2017-03-29 15:55:14.837] [TRACE] main - Request for / received.
+[2017-03-29 15:55:14.843] [TRACE] main - About to route a request for /
+[2017-03-29 15:55:14.844] [TRACE] main - Request handler 'Start' was called
+[2017-03-29 15:55:20.134] [TRACE] main - Request for /upload received.
+[2017-03-29 15:55:20.134] [TRACE] main - About to route a request for /upload
+[2017-03-29 15:55:20.134] [TRACE] main - Request handler 'Upload' was called
+[2017-03-29 15:55:20.135] [TRACE] main - about to parse
+[2017-03-29 15:55:20.143] [TRACE] main - parsing done
+[2017-03-29 15:55:20.143] [TRACE] main - rename file done
+[2017-03-29 15:55:20.153] [TRACE] main - Request for /show received.
+[2017-03-29 15:55:20.153] [TRACE] main - About to route a request for /show
+[2017-03-29 15:55:20.154] [TRACE] main - Request handler 'show' was called.
