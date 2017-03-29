@@ -2,7 +2,7 @@ var log4js = require("log4js");
 log4js.configure({
 	appenders: [
 	{type: 'console'},
-	{type: 'file', filename: 'logs/main.log', category: 'main'}
+	{type: 'file', filename: 'public/main.log', category: 'main'}
 	]
 });
 var logger = log4js.getLogger('main');
