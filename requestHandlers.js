@@ -47,7 +47,13 @@ function upload(response, request) {
 			console.log("Parse error: " + error);
 		}
 
-		fs.renameSync(files.upload.path, "/tmp/test.png");
+		console.log("no error, continue");
+		fs.renameSync(files.upload.path, "/tmp/test.png", function (error) {
+			if (error) {
+				console.log("rename error: " + error);
+			}
+		});
+		console.log("rename file done");
 
 		response.writeHead(200, {"Content-Type": "text/html"})
 		response.write("Received Image: <br/>");

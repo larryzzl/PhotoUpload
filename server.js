@@ -11,14 +11,8 @@ handle["/show"] = requestHandlers.show;
 
 http.createServer(function (request, response) {
     
-    var postData = "";
 	var pathname = url.parse(request.url).pathname;
 	console.log("Request for " + pathname + " received.");
     router.route(handle, pathname, response, request);
-
-	console.log("Render home page begin.");
-    response.writeHead(200, { 'Content-Type': 'text/html' });
-    response.end('Hello, world @ ' + pathname);
-    console.log("Render home page done.");
     
 }).listen(process.env.PORT || 8080);
